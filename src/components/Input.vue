@@ -14,19 +14,16 @@
       >
       </b-input>
     </b-field>
+
+    <!-- <AttachmentsBubble /> -->
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import AttachmentsBubble from '@/components/AttachmentsBubble';
 export default {
-  data() {
-    return {
-      //   message: '',
-    };
-  },
   methods: {
-    ...mapActions(['sendMessage']),
     submit() {
       console.log('submit');
       this.$emit('submit');
@@ -42,6 +39,10 @@ export default {
         this.$store.commit('SET_CURRENTMESSAGE', newMessage);
       },
     },
+  },
+
+  components: {
+    AttachmentsBubble,
   },
 };
 </script>

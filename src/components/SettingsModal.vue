@@ -17,34 +17,31 @@
           <b-field label="Username">
             <b-input
               type="no-label"
-              :value="$store.state.username"
               placeholder="Anonymous"
+              :value="$store.state.username"
+              icon="user-circle"
+              icon-pack="fa"
+              minlength="4"
+              maxlength="50"
+              :lazy="true"
             >
             </b-input>
           </b-field>
-          <b-field
-            class="file"
-            label="ProfilePicture"
-            :class="{ 'has-name': !!file }"
-            type="file"
-          >
-            <b-upload
-              v-model="file"
-              v-on:input="updateFile()"
-              class="file-label"
-              :expanded="true"
-            >
-              <a class="button is-danger is-fullwidth">
+
+          <b-field class="file">
+            <b-upload v-model="file" v-on:input="updateFile()" expanded>
+              <a class="button is-primary is-fullwidth">
                 <b-icon icon="upload"></b-icon>
-                <span>{{ 'Click to upload' }}</span>
+                <span>{{ file.name || 'Click to upload' }}</span>
               </a>
             </b-upload>
-            <div class="box">
-              <figure class="image is-128x128 is-centered">
-                <img src="https://bulma.io/images/placeholders/128x128.png" />
-              </figure>
-            </div>
           </b-field>
+          <div class="box">
+            <img
+              id="profilePicture"
+              src="https://bulma.io/images/placeholders/128x128.png"
+            />
+          </div>
 
           <b-checkbox>Remember me</b-checkbox>
         </section>
@@ -52,7 +49,7 @@
           <button class="button" type="button" @click="$emit('close')">
             Close
           </button>
-          <button class="button is-danger" @click="saveProfilePicture()">
+          <button class="button is-danger">
             Save
           </button>
         </footer>
@@ -65,43 +62,17 @@
 export default {
   data() {
     return {
-      file: null,
+      file: {},
       file_encoded: '',
       file_isloaded: false,
     };
   },
   methods: {
     updateFile() {
-      console.log(this.file);
-      // let reader = new FileReader();
-      // reader.onloadend = function() {
-      //   console.log(this.file);
-      //   this.file_encoded = reader.result;
-      //   console.log(this.file_encoded);
-      // };
-      // reader.readAsDataURL(this.file);
-
-      var reader = new FileReader();
-      reader.onload = (function(reader) {
-        return function() {
-          this.file_encoded = reader.result.toString();
-          this.$store.dispatch('updateProfilePicture', {
-            file_encoded: this.file_encoded,
-          });
-          console.log(this.file_encoded);
-        };
-      })(reader);
-
-      reader.readAsDataURL(this.file);
-    },
-    saveProfilePicture() {
-      // if (this.file_encoded == '') {
-      //   this.$buefy.toast.open('takli upload profile photo first');
-      //   return;
-      // }
-      console.log(this.file_encoded);
-      this.$store.dispatch('updateProfilePicture', {
-        file_encoded: this.file_encoded,
+      console.log(this.$store.state.userId);
+      this.$store.dispatch('saveProfilePicture', {
+        file: this.file,
+        uid: this.$store.state.userId,
       });
     },
   },
@@ -119,5 +90,9 @@ export default {
 }
 b-upload {
   border-radius: 5px;
+}
+
+#file_upload {
+  width: 100%;
 }
 </style>

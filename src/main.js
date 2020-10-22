@@ -3,14 +3,19 @@ import App from './App.vue';
 import store from './store';
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
-import VueChatScroll from 'vue-chat-scroll';
+import router from './router';
+import axios from 'axios';
+import { firestorePlugin } from 'vuefire';
+
+Vue.use(firestorePlugin);
 
 Vue.use(Buefy);
-Vue.use(VueChatScroll);
+Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false;
 
 new Vue({
   store,
+  router,
   render: (h) => h(App),
 }).$mount('#app');
