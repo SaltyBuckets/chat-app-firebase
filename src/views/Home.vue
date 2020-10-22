@@ -51,7 +51,7 @@ export default {
   },
   methods: {
   
-  function scrolly() {
+   scrolly() {
     let element = document.getElementsByClassName("messages");
     element.scrollTop = element.scrollHeight;
     };
