@@ -50,12 +50,19 @@ export default {
     },
   },
   methods: {
+  
+  function scrolly() {
+    let element = document.getElementsByClassName("messages");
+    element.scrollTop = element.scrollHeight;
+    };
+  
     sendMessage() {
+    
+    scrolly();
+    
       this.$store.dispatch('sendMessage');
 
-      window.scrollBy({
-        top: 10000000,
-        left: 0,
+      window.scrollBy({   
         behavior: 'smooth',
       });
     },
@@ -99,11 +106,6 @@ export default {
   margin-bottom: 20vh;
   padding: 0 10px;
   margin-top: 0px;
-  scrolly();
 }
 
-function scrolly() {
-    let element = document.getElementsByClassName("messages");
-    element.scrollTop = element.scrollHeight;
-}
 </style>
