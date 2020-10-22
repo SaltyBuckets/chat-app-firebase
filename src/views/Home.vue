@@ -96,9 +96,14 @@ export default {
 }
 .messages {
   scroll-margin-bottom: 400px;
-  margin-bottom: 300px;
+  margin-bottom: 20vh;
   padding: 0 10px;
-
   margin-top: 0px;
+  scrolly();
+}
+
+function scrolly() {
+    let element = document.getElementsByClassName("messages");
+    element.scrollTop = element.scrollHeight;
 }
 </style>
