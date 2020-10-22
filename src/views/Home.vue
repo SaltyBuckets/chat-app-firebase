@@ -8,7 +8,7 @@
         :message="message.message"
         :date="message.date"
         :image="message.image"
-      /> -->
+      />-->
       <Message
         v-for="(message, index) in Messages"
         :key="index"
@@ -26,44 +26,42 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar';
-import Input from '@/components/Input';
-import Message from '@/components/Message';
-import SettingsModal from '@/components/SettingsModal';
-import database from '@/firebase.js';
-import { db } from '@/db.js';
+import Navbar from "@/components/Navbar";
+import Input from "@/components/Input";
+import Message from "@/components/Message";
+import SettingsModal from "@/components/SettingsModal";
+import database from "@/firebase.js";
+import { db } from "@/db.js";
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      username: 'username',
-      profilePicture: 'imageUrl',
+      username: "username",
+      profilePicture: "imageUrl",
       modalIsActive: false,
       currentGroupchat: null,
-      messages: [],
+      messages: []
     };
   },
 
   computed: {
     Messages() {
       return this.$store.state.doc.messages;
-    },
+    }
   },
   methods: {
-  
-   scrolly() {
-    let element = document.getElementsByClassName("messages");
-    element.scrollTop = element.scrollHeight;
-    };
-  
-    sendMessage() {
-    
-    scrolly();
-    
-      this.$store.dispatch('sendMessage');
+    scrolly() {
+      let element = document.getElementsByClassName("messages");
+      element.scrollTop = element.scrollHeight;
+    },
 
-      window.scrollBy({   
-        behavior: 'smooth',
+    sendMessage() {
+      scrolly();
+
+      this.$store.dispatch("sendMessage");
+
+      window.scrollBy({
+        behavior: "smooth"
       });
     },
     activateModal() {
@@ -76,18 +74,18 @@ export default {
 
     testdb() {
       console.log(this.Messages);
-    },
+    }
   },
 
   created() {
-    this.$store.dispatch('bindMessages');
+    this.$store.dispatch("bindMessages");
   },
   components: {
     Navbar,
     Input,
     Message,
-    SettingsModal,
-  },
+    SettingsModal
+  }
 };
 </script>
 
@@ -107,5 +105,4 @@ export default {
   padding: 0 10px;
   margin-top: 0px;
 }
-
 </style>
